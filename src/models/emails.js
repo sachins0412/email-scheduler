@@ -11,7 +11,7 @@ const emailSchema = mongoose.Schema({
     default: "not sent",
   },
   scheduled: {
-    type: Date,
+    type: String,
     required: true,
     validate(value) {
       if (!checkDate(value)) throw new Error("invaid date");

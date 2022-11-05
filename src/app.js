@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
+const emailRouter = require("./router/emailRouter");
+
+app.use("/", emailRouter);
 
 module.exports = app;
