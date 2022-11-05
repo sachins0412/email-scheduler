@@ -22,7 +22,7 @@ router.post("/emails", async (req, res) => {
     res.status(201).send(email);
   } catch (e) {
     console.log(e);
-    return res.status(400).send(e);
+    return res.status(400).send(e.message);
   }
 });
 
