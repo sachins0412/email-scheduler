@@ -2,8 +2,10 @@
   "name": "email-scheduler",
   "version": "1.0.0",
   "description": "API to schedule and send emails",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
+    "start": "node .",
+    "start-dev": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
