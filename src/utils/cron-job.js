@@ -1,5 +1,5 @@
 const cron = require("node-cron");
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 const Email = require("./../models/emails");
 
