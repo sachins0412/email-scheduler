@@ -26,4 +26,24 @@ router.post("/emails", async (req, res) => {
   }
 });
 
+router.get("/email/:id", async (req, res) => {
+  //WIP
+});
+
+router.get("/email", async (req, res) => {
+  //WIP
+});
+
+router.patch("/email/:id", async (req, res) => {
+  //WIP
+});
+
+router.delete("/email/:id", async (req, res) => {
+  //WIP
+});
+
+router.get("/email/unsent", async (req, res) => {
+  //WIP
+});
+
 module.exports = router;
