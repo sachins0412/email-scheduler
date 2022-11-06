@@ -78,6 +78,10 @@ router.patch(
         if (req.body[update]) email.data[update] = req.body[update];
       });
       email.markModified("data");
+
+      //rescheduling failed email
+      if (email.status === "failed") email.status = "not sent";
+
       await email.save();
 
       res.send(email);
