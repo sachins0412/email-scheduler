@@ -5,7 +5,8 @@ const Email = require("./../models/emails");
 const checkDateMiddleware = require("./../middlewares/checkDate");
 const validator = require("./../middlewares/validator");
 
-router.post("/emails", checkDateMiddleware, async (req, res) => {
+//TODO combine checkdate and validator
+router.post("/emails", checkDateMiddleware, validator, async (req, res) => {
   try {
     const params = req.body;
 
