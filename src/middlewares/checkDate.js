@@ -8,16 +8,12 @@ const checkDateMiddleware = (req, res, next) => {
 };
 
 const checkDate = (date) => {
-  console.log("timezone time", moment().tz("Asia/Kolkata"));
-  console.log("moment", moment());
-  console.log("moment input date", moment(date));
-  console.log(
-    "moment compate",
-    moment(date).isAfter(moment().tz("Asia/Kolkata"))
-  );
+  console.log("input date", moment(date));
+  console.log("current", moment());
+  console.log("compare", moment(date).isAfter(moment()));
   return (
     moment(date, "MM-DD-YYYY HH:mm", true).isValid() &&
-    moment(date).isAfter(moment().tz("Asia/Kolkata"))
+    moment(date).isAfter(moment())
   );
 };
 

@@ -1,3 +1,6 @@
+var moment = require("moment-timezone");
+moment.tz.setDefault("Asia/Kolkata");
+
 const express = require("express");
 const app = express();
 
