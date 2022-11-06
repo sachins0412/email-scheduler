@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 const checkDateMiddleware = (req, res, next) => {
-  if (!checkDate(req.body.when)) {
+  if (req.body.when && !checkDate(req.body.when)) {
     return res.status(400).send("Invalid date");
   }
   next();
