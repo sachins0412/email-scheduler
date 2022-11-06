@@ -1,4 +1,5 @@
 const cron = require("node-cron");
+const moment = require("moment");
 
 const Email = require("./../models/emails");
 
@@ -8,9 +9,10 @@ const startCronJob = () => {
   cron.schedule("* * * * *", async () => {
     try {
       console.log("running a task every minute");
-      //TODO modify query to retrieve emails with scheduled time as now and status unsent
-      const emails = await Email.find({});
-
+      const emails = await Email.find({
+        status: "not sent",
+        scheduled: moment().format("MM-DD-YYYY HH:mm"),
+      });
       if (emails.length) {
         emails.forEach(async (email) => {
           try {
