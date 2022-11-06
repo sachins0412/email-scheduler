@@ -8,20 +8,21 @@ const startCronJob = () => {
   cron.schedule("* * * * *", async () => {
     try {
       console.log("running a task every minute");
+      //TODO modify query to retrieve emails with scheduled time as now and status unsent
+      const emails = await Email.find({});
 
-      const email = await Email.find({});
-
-      if (email.length) {
-        try {
-          //will have to iterate over the array
-          await sendEmail(email[1].data);
-          email[1].status = "sent";
-          await email[1].save();
-        } catch (error) {
-          console.log(error);
-          email[1].status = "failed";
-          await email[1].save();
-        }
+      if (emails.length) {
+        emails.forEach(async (email) => {
+          try {
+            await sendEmail(email.data);
+            email.status = "sent";
+            await email.save();
+          } catch (error) {
+            console.log(error);
+            email.status = "failed";
+            await email.save();
+          }
+        });
       }
     } catch (error) {
       console.log(error);
