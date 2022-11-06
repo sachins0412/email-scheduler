@@ -43,8 +43,15 @@ router.get("/emails/:id", validator, async (req, res) => {
   }
 });
 
-router.get("/email", async (req, res) => {
-  //WIP
+router.get("/emails", async (req, res) => {
+  try {
+    const emails = await Email.find({});
+
+    res.send(emails);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 });
 
 router.patch("/email/:id", async (req, res) => {
