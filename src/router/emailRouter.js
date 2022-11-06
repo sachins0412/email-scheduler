@@ -28,6 +28,18 @@ router.post("/emails", checkDateMiddleware, async (req, res) => {
   }
 });
 
+//get unsent & failed emails
+router.get("/emails/unsent", async (req, res) => {
+  try {
+    const emails = await Email.find({ status: { $ne: "sent" } });
+
+    res.send(emails);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+});
+
 router.get("/emails/:id", validator, async (req, res) => {
   try {
     const email = await Email.findById(req.params.id);
@@ -104,10 +116,6 @@ router.delete("/emails/:id", validator, async (req, res) => {
     console.log(error);
     res.status(500).send(error.message);
   }
-});
-
-router.get("/email/unsent", async (req, res) => {
-  //WIP
 });
 
 module.exports = router;
