@@ -1,5 +1,5 @@
 var moment = require("moment-timezone");
-moment.tz.setDefault("Asia/Kolkata");
+moment.tz.setDefault("Asia/Kolkata", true);
 
 const express = require("express");
 const app = express();
