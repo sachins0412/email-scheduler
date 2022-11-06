@@ -10,7 +10,7 @@ const checkDateMiddleware = (req, res, next) => {
 const checkDate = (date) => {
   return (
     moment(date, "MM-DD-YYYY HH:mm", true).isValid() &&
-    moment(date).isAfter(moment())
+    moment(date).isAfter(moment().utcOffset("+05:30"))
   );
 };
 
