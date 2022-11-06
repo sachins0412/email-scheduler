@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const checkDate = require("./../utils/checkDate");
 
 const emailSchema = mongoose.Schema({
   data: {
@@ -13,9 +12,6 @@ const emailSchema = mongoose.Schema({
   scheduled: {
     type: String,
     required: true,
-    validate(value) {
-      if (!checkDate(value)) throw new Error("invaid date");
-    },
   },
 });
 
