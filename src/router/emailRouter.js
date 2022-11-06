@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { SENDER } = require("./../enums/email-constants");
 const Email = require("./../models/emails");
+const checkDateMiddleware = require("./../middlewares/checkDate");
 
-router.post("/emails", async (req, res) => {
+router.post("/emails", checkDateMiddleware, async (req, res) => {
   try {
     const params = req.body;
 
