@@ -11,7 +11,7 @@ const startCronJob = () => {
       console.log("running cron job now");
       const emails = await Email.find({
         status: "not sent",
-        scheduled: moment().utcOffset("+05:30").format("MM-DD-YYYY HH:mm"),
+        scheduled: moment().tz("Asia/Kolkata").format("MM-DD-YYYY HH:mm"),
       });
       if (emails.length) {
         emails.forEach(async (email) => {
