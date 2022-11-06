@@ -3,6 +3,7 @@ const router = express.Router();
 const { SENDER } = require("./../enums/email-constants");
 const Email = require("./../models/emails");
 const checkDateMiddleware = require("./../middlewares/checkDate");
+const validator = require("./../middlewares/validator");
 
 router.post("/emails", checkDateMiddleware, async (req, res) => {
   try {
@@ -27,8 +28,19 @@ router.post("/emails", checkDateMiddleware, async (req, res) => {
   }
 });
 
-router.get("/email/:id", async (req, res) => {
-  //WIP
+router.get("/emails/:id", validator, async (req, res) => {
+  try {
+    const email = await Email.findById(req.params.id);
+
+    if (!email) {
+      return res.status(404).send("No email scheduled for given id");
+    }
+
+    res.send(email);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 });
 
 router.get("/email", async (req, res) => {
