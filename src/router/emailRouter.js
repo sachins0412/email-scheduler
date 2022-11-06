@@ -54,9 +54,36 @@ router.get("/emails", async (req, res) => {
   }
 });
 
-router.patch("/email/:id", async (req, res) => {
-  //WIP
-});
+router.patch(
+  "/emails/:id",
+  checkDateMiddleware,
+  validator,
+  async (req, res) => {
+    try {
+      //maybe update the query to not allow modification of sent emails
+      const email = await Email.findById(req.params.id);
+
+      if (!email) {
+        return res.status(404).send("No email scheduled for given id");
+      }
+
+      if (req.body.when) email.scheduled = req.body.when;
+
+      let allowedUpdates = ["to", "from", "subject", "text"];
+
+      allowedUpdates.forEach((update) => {
+        if (req.body[update]) email.data[update] = req.body[update];
+      });
+      email.markModified("data");
+      await email.save();
+
+      res.send(email);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+    }
+  }
+);
 
 router.delete("/email/:id", async (req, res) => {
   //WIP
