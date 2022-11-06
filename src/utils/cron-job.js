@@ -8,7 +8,7 @@ const { sendEmail } = require("./sendEmail");
 const startCronJob = () => {
   cron.schedule("* * * * *", async () => {
     try {
-      console.log("running a task every minute");
+      console.log("running cron job now");
       const emails = await Email.find({
         status: "not sent",
         scheduled: moment().format("MM-DD-YYYY HH:mm"),
@@ -17,6 +17,7 @@ const startCronJob = () => {
         emails.forEach(async (email) => {
           try {
             await sendEmail(email.data);
+            console.log("email sent");
             email.status = "sent";
             await email.save();
           } catch (error) {
