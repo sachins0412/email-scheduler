@@ -60,11 +60,14 @@ router.patch(
   validator,
   async (req, res) => {
     try {
-      //maybe update the query to not allow modification of sent emails
       const email = await Email.findById(req.params.id);
 
       if (!email) {
         return res.status(404).send("No email scheduled for given id");
+      }
+
+      if (email.status === "sent") {
+        return res.status(403).send("Cannot update already sent emails");
       }
 
       if (req.body.when) email.scheduled = req.body.when;
@@ -85,8 +88,18 @@ router.patch(
   }
 );
 
-router.delete("/email/:id", async (req, res) => {
-  //WIP
+router.delete("/emails/:id", validator, async (req, res) => {
+  try {
+    const email = await Email.findByIdAndDelete(req.params.id);
+    if (!email) {
+      return res.status(404).send("No email scheduled for given id");
+    }
+
+    res.send(email);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
 });
 
 router.get("/email/unsent", async (req, res) => {
