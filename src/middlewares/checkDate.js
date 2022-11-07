@@ -4,21 +4,11 @@ const checkDateMiddleware = (req, res, next) => {
   if (req.body.when && !checkDate(req.body.when)) {
     return res.status(400).send("Invalid date");
   }
-  req.body.when = moment(req.body.when).subtract(330, "minutes");
+  req.body.when = moment(req.body.when).subtract(330, "minutes"); // convert date to utc
   next();
 };
 
 const checkDate = (date) => {
-  console.log("input date", moment(date));
-  console.log("input date in utc", moment(date).subtract(330, "minutes"));
-
-  console.log("current", moment());
-  console.log("current in utc", moment().utc());
-
-  console.log(
-    "compare",
-    moment(date).subtract(330, "minutes").isAfter(moment())
-  );
   return (
     moment(date, "MM-DD-YYYY HH:mm", true).isValid() &&
     moment(date).subtract(330, "minutes").isAfter(moment())
