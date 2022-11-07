@@ -9,7 +9,7 @@ const checkDateMiddleware = (req, res, next) => {
 
 const checkDate = (date) => {
   console.log("input date", moment(date));
-  console.log("input date in utc", moment(date).utc());
+  console.log("input date in utc", moment(date).subtract(360, "minutes"));
 
   console.log("current", moment());
   console.log("current in utc", moment().utc());
