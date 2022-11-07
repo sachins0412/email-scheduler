@@ -3,6 +3,8 @@ API to schedule and send emails using nodejs,express,mongodb,node-cron & send-gr
 
 This provides routes to schedule an email, reschedule it, get email info by id, get all emails, get all failed/unsent emails, delete emails by id.
 
+Note : Date should be provided in IST, the app will convert it to UTC while storing in database.
+
 # About routes
 
 ## 1. Schedule an email (create) : POST {{host}}/emails/
