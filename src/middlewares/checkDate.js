@@ -9,7 +9,11 @@ const checkDateMiddleware = (req, res, next) => {
 
 const checkDate = (date) => {
   console.log("input date", moment(date));
+  console.log("input date in utc", moment(date).utc());
+
   console.log("current", moment());
+  console.log("current in utc", moment().utc());
+
   console.log("compare", moment(date).isAfter(moment()));
   return (
     moment(date, "MM-DD-YYYY HH:mm", true).isValid() &&
