@@ -4,7 +4,7 @@ const checkDateMiddleware = (req, res, next) => {
   if (req.body.when && !checkDate(req.body.when)) {
     return res.status(400).send("Invalid date");
   }
-
+  req.body.when = moment(req.body.when).subtract(330, "minutes");
   next();
 };
 
