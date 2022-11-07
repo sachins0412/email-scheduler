@@ -1,4 +1,4 @@
-const moment = require("moment-timezone");
+const moment = require("moment");
 
 const checkDateMiddleware = (req, res, next) => {
   if (req.body.when && !checkDate(req.body.when)) {
